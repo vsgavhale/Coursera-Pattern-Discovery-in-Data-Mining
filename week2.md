@@ -12,7 +12,8 @@ Suppose a school collected some data on students’ preference for hot dogs(HD) 
 | **Sigma_col**  |      250    |    150       |  400         |
 
 
-```{r}
+
+```r
 lift <- function(input) {
     sigmaRow <- sum(input[1:2])
     sigmaCol <- sum(input[1], input[3])
@@ -25,8 +26,19 @@ lift <- function(input) {
 }
 input <- c(40, 24, 210, 126)
 lift(input)
+```
+
+```
+## [1] 1
+```
+
+```r
 input <- c(300, 700, 1200, 800)
 lift(input)
+```
+
+```
+## [1] 0.6
 ```
 
 #### Problem 2.
@@ -38,7 +50,8 @@ Suppose we are interested in analyzing the purchase of comics (CM) and fictions(
 | **¬FC**        |     1200    |     800      |  2000        |
 | **Sigma_col**  |     1500    |    1500      |  3000        |
 
-```{r}
+
+```r
 chiSquare <- function(input) {
     sigmaRow1 <- sum(input[1:2])
     sigmaCol1 <- sum(input[1], input[3])
@@ -56,8 +69,19 @@ chiSquare <- function(input) {
 }
 input <- c(300, 700, 1200, 800)
 chiSquare(input)
+```
+
+```
+## [1] 240
+```
+
+```r
 input <- c(700, 300, 500, 1500)
 chiSquare(input)
+```
+
+```
+## [1] 562.5
 ```
 #### Problem 3 & 4.
 What is the value range of the XXX measure?  
@@ -78,7 +102,8 @@ Both Kulcyzynski and Cosine are null invariant measures and thus not sensitive t
 
 #### Problem 6.  
 A store had 100,000 total transactions in Q4 2014. 10,000 transactions contained eggs, while 5,000 contained bacon. 2000 transactions contained both eggs and bacon. Which of the following choices for the value of ε is the smallest such that {eggs, bacon} is considered a negative pattern under the null-invariant definition?  
-```{r}
+
+```r
 nullVar <- function(input) {
     # Support based
     supA <- input[2] / input[1]
@@ -94,8 +119,27 @@ nullVar <- function(input) {
 }
 input <- c(100000, 10000, 5000, 2000)
 nullVar(input) # choose the smallest number that's greater than this
+```
+
+```
+## [1] TRUE
+```
+
+```
+## [1] 0.3
+```
+
+```r
 input <- c(100000, 10000, 5000, 600)
 nullVar(input) # choose the smallest number that's greater than this
+```
+
+```
+## [1] TRUE
+```
+
+```
+## [1] 0.09
 ```
 
 #### Problem 7.   
@@ -110,7 +154,8 @@ nullVar(input) # choose the smallest number that's greater than this
 
 Which of the following patterns in Table 1 is δ-covered by {F, A, C, E, T, S} for δ=0.4? Select all that apply.  
 
-```{r}
+
+```r
 deltaCover <- function(input, p1, delta) {
     idList <- c("P1", "P2", "P4", "P5")
     for (i in 1:length(input)) {
@@ -124,6 +169,11 @@ p1 <- 101758
 delta <- 0.4
 input <- c(205226, 205211, 161563, 161576)
 deltaCover(input, p1, delta)
+```
+
+```
+## [1] "P4"
+## [1] "P5"
 ```
 
 #### Problem 8.
