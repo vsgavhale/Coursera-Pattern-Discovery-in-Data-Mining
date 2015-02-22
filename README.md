@@ -1,4 +1,4 @@
-Cousera-Pattern-Discovery-in-Data-Mining  
+Coursera-Pattern-Discovery-in-Data-Mining  
 ========================================
 
 Programming Assignments of Coursera.com online course: Pattern Discovery in Data Mining

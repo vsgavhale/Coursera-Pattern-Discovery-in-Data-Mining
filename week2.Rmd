@@ -1,0 +1,62 @@
+---
+title: "week2"
+output: html_document
+---
+#### Problem 1.
+Suppose a school collected some data on students’ preference for hot dogs(HD) vs. hamburgers(HM). We have the following 2×2 contingency table summarizing the statistics. If lift is used to measure the correlation between HD and HM, what is the value for lift(HD, HM)?  
+
+|                | HD          | ¬HD          | Sigma_row    |
+|:--------------:|:-----------:|:------------:|:------------:|
+| **HM**         |      40     |     24       |  64          | 
+| **¬HM**        |      210    |    126       |  336         |
+| **Sigma_col**  |      250    |    150       |  400         |
+
+
+```{r}
+lift <- function(input) {
+    sigmaRow <- sum(input[1:2])
+    sigmaCol <- sum(input[1], input[3])
+    sigmaAll <- sum(input)
+    suppAUB <- input[1] / sigmaAll
+    suppA <- sigmaCol / sigmaAll
+    suppB <- sigmaRow / sigmaAll
+    lift <- suppAUB / (suppA * suppB)
+    return(lift)
+}
+input <- c(40, 24, 210, 126)
+lift(input)
+input <- c(300, 700, 1200, 800)
+lift(input)
+```
+
+#### Problem 1.
+Suppose we are interested in analyzing the purchase of comics (CM) and fictions(FC) in the transaction history of a bookstore. We have the following 2 × 2 contingency table summarizing the transactions. If χ2 is used to measure the correlation between CM and FC, what is the χ2 score?  
+
+|                | CM          | ¬CM          | Sigma_row    |
+|:--------------:|:-----------:|:------------:|:------------:|
+| **FC**         |      300    |     700      |  1000        | 
+| **¬FC**        |     1200    |     800      |  2000        |
+| **Sigma_col**  |     1500    |    1500      |  3000        |
+
+```{r}
+chiSquare <- function(input) {
+    sigmaRow1 <- sum(input[1:2])
+    sigmaCol1 <- sum(input[1], input[3])
+    sigmaAll <- sum(input)
+    exp1 <- sigmaCol1 * sigmaRow1 / sigmaAll
+    exp3 <- sigmaCol1 - exp1
+    exp2 <- sigmaRow1 - exp1
+    exp4 <- sigmaAll - sigmaCol1 - exp2
+    expInput <- c(exp1, exp2, exp3, exp4)
+    chiSq <- 0
+    for (i in 1:4) {
+        chiSq = chiSq + (input[i] - expInput[i])^2 / expInput[i]
+    }
+    return(chiSq)
+}
+input <- c(300, 700, 1200, 800)
+chiSquare(input)
+input <- c(700, 300, 500, 1500)
+chiSquare(input)
+```
+
