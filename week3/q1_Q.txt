@@ -1,0 +1,4 @@
+<a(ab)(bcef)>
+<(bf)(ae)(bdf)>
+<(abd)c(bef)d>
+<(af)(bdf)(ae)>
