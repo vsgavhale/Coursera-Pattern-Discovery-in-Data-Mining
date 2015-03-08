@@ -5,6 +5,7 @@ __author__      = "Sallyxdz"
 import re
 import itertools
 from collections import Counter
+from math import factorial
 
 
 def readfile(FILENAME):
@@ -59,15 +60,6 @@ def is_valid(str):
         else:
             pass
     return len(stack) == 0
-
-def make_dict(seqs):
-    result = ""
-    for each_seq in seqs:
-        seq = "".join(each_seq)
-        result += seq
-
-    #freqs = Counter(result)
-    #print freqs
 
 
 def frequent_sequences(q_elems, a, min_sup):
@@ -130,34 +122,80 @@ def is_sub_sequence(q, a):
         return False
 
 '''
-Main function
+Helper function for Problem 2
 '''
-def main(Q_FILENAME, A_FILENAME, min_sup):
-    q_seqs = readfile(Q_FILENAME)
-    # print q_seqs
-    # make_dict(q_seqs)
+def make_dict(seqs, min_sup, length=2):
+    gsp_freqs = Counter()
+    all_seq = ""
+    for each_seq in seqs:
+        seq = "".join(each_seq)
+        gsp_freqs += Counter(set(seq))
+        all_seq += seq
 
+    all_values = set(all_seq)
+    len_all = len(all_values)
+
+    # Filter the dictionary by min support
+    # Apriori pruning
+    gsp_freqs = { k:v for k, v in gsp_freqs.iteritems() if v >= min_sup }
+    all_values_pruning = gsp_freqs.keys()
+    len_pruning = len(all_values_pruning)
+    print cand_seq_num(len_pruning, length) + "; " + \
+                cand_seq_num(len_all, length)
+'''
+Helper function for Problem 2
+Modified function for calculating candidate sequence number
+'''
+
+def cand_seq_num(n, r):
+    num = factorial(n)
+    denom = factorial(r) * factorial(n - r)
+    return str(n * n + num / denom)
+
+'''
+Main function for Problem 1
+'''
+def problem_1(Q_FILENAME, A_FILENAME, min_sup):
+    q_seqs = readfile(Q_FILENAME)
     a_seqs = readfile(A_FILENAME)
-    # print a_seqs
 
     for a in a_seqs:
         result = frequent_sequences(q_seqs, a, min_sup)
         print " ".join(a) + " => " + str(result)
 
 
+'''
+Main function for Problem 2
+'''
+def problem_2(Q_FILENAME, min_sup):
+    q_seqs = readfile(Q_FILENAME)
+    # print q_seqs
+
+    make_dict(q_seqs, min_sup)
+
 if __name__ == '__main__':
 
-    # Problem 1
+    print "------------Problem 1-------------"
     Q_FILENAME = "q1_Q.txt"
     A_FILENAME = "q1_A.txt"
     min_sup = 3
-    main(Q_FILENAME, A_FILENAME, min_sup)
+    problem_1(Q_FILENAME, A_FILENAME, min_sup)
 
+    """
+    # Another dataset for testing
     print "-----------------------------"
     Q_FILENAME = "q11_Q.txt"
     A_FILENAME = "q11_A.txt"
     min_sup = 3
-    main(Q_FILENAME, A_FILENAME, min_sup)
+    problem_1(Q_FILENAME, A_FILENAME, min_sup)
+    """
+
+    print "------------Problem 2-------------"
+    Q_FILENAME = "q2_Q.txt"
+    min_sup = 3
+    problem_2(Q_FILENAME, min_sup)
+
+
 
 
 
