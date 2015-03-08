@@ -1,9 +1,9 @@
 #### Problem 1.
 
-Look at the Problem 1 part in the script's main function.
-To run the code, simply:
+Look at the Problem 1 part in the script's main function.  
+To run the code, simply:  
 
-    python week3.py
+    python week3.py  
 
 Remember to set two input files and the min support value in main function:  
 1. a text file containing the data of Sequence database (q1_Q.txt)  
