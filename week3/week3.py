@@ -74,14 +74,16 @@ def frequent_sequences(q_elems, a, min_sup):
     if min_sup > len(q_elems):
         return False
     print " ".join(a) + " " + "is subsequence of: "
+    index = []
     for i in range(len(q_elems)):
         q = q_elems[i]
         if is_sub_sequence(q, a):
-            print  i+1
+            index.append(str(i+1))
             min_sup -= 1
             # early return until reaches min_sup
             # if min_sup <= 0:
             #     return True
+    print " ".join(index)
 
     # run through all q_elems
     if min_sup <= 0:
@@ -127,8 +129,6 @@ def is_sub_sequence(q, a):
     else:
         return False
 
-
-
 '''
 Main function
 '''
@@ -146,11 +146,14 @@ def main(Q_FILENAME, A_FILENAME, min_sup):
 
 
 if __name__ == '__main__':
+
+    # Problem 1
     Q_FILENAME = "q1_Q.txt"
     A_FILENAME = "q1_A.txt"
     min_sup = 3
     main(Q_FILENAME, A_FILENAME, min_sup)
 
+    print "-----------------------------"
     Q_FILENAME = "q11_Q.txt"
     A_FILENAME = "q11_A.txt"
     min_sup = 3
