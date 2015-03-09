@@ -64,7 +64,10 @@ def is_valid(str):
 def frequent_sequences(q_elems, a, min_sup):
     if min_sup > len(q_elems):
         return False
-    print " ".join(a) + " " + "is subsequence of: "
+    # if type(a) is list:
+    #         print " ".join(a) + " " + "is subsequence of: "
+    # else:
+    #         print a + " " + "is subsequence of: "
     index = []
     for i in range(len(q_elems)):
         q = q_elems[i]
@@ -110,9 +113,10 @@ def is_sub_sequence(q, a):
         return False
 
 '''
-Helper function for Problem 2
+Helper function for Problem 2 and 3
+Return a list containing all unique letters and a dictionary of letters as keys and values as counts using Apriori pruning.
 '''
-def make_dict(seqs, min_sup, length=2):
+def make_dict(seqs, min_sup):
     gsp_freqs = Counter()
     all_seq = ""
     for each_seq in seqs:
@@ -121,15 +125,12 @@ def make_dict(seqs, min_sup, length=2):
         all_seq += seq
 
     all_values = set(all_seq)
-    len_all = len(all_values)
-
     # Filter the dictionary by min support
     # Apriori pruning
     gsp_freqs = { k:v for k, v in gsp_freqs.iteritems() if v >= min_sup }
-    all_values_pruning = gsp_freqs.keys()
-    len_pruning = len(all_values_pruning)
-    print cand_seq_num(len_pruning, length) + "; " + \
-                cand_seq_num(len_all, length)
+
+    return [all_values, gsp_freqs]
+
 '''
 Helper function for Problem 2
 Modified function for calculating candidate sequence number
@@ -147,19 +148,57 @@ def problem_1(Q_FILENAME, A_FILENAME, min_sup):
     q_seqs = readfile(Q_FILENAME)
     a_seqs = readfile(A_FILENAME)
 
+    if not q_seqs or not a_seqs:
+        return False
+
     for a in a_seqs:
         result = frequent_sequences(q_seqs, a, min_sup)
-        print " ".join(a) + " => " + str(result)
 
+        print " ".join(a) + " => " + str(result)
 
 '''
 Main function for Problem 2
 '''
-def problem_2(Q_FILENAME, min_sup):
+def problem_2(Q_FILENAME, min_sup, length=2):
     q_seqs = readfile(Q_FILENAME)
-    # print q_seqs
+    if not q_seqs:
+        return False
 
-    make_dict(q_seqs, min_sup)
+    # print q_seqs
+    [all_values, gsp_freqs] = make_dict(q_seqs, min_sup)
+    all_values_pruning = gsp_freqs.keys()
+    len_all = len(all_values)
+    len_pruning = len(all_values_pruning)
+    print cand_seq_num(len_pruning, length) + "; " + \
+                cand_seq_num(len_all, length)
+
+'''
+Main function for Problem 3
+'''
+def problem_3(Q_FILENAME, min_sup, length=2):
+    q_seqs = readfile(Q_FILENAME)
+    if not q_seqs:
+        return False
+
+    [all_values, gsp_freqs] = make_dict(q_seqs, min_sup)
+    all_values_pruning = gsp_freqs.keys()
+    print "Frequent items: " + str(all_values_pruning)
+    freq_terms = []
+    for c in list(itertools.combinations(all_values_pruning, length)):
+        freq_terms.append(["".join(c)])
+    for p in list(itertools.permutations(all_values_pruning, length)):
+        freq_terms.append(list(p))
+    for a in all_values_pruning:
+        freq_terms.append(list(a*length))
+    print "Candidate sequences: " + str(freq_terms)
+    for f in freq_terms:
+        result = frequent_sequences(q_seqs, f, min_sup)
+        # only print True results
+        if result:
+            if type(f) is list:
+                print " ".join(f) + " => " + str(result)
+            else:
+                print f + " => " + str(result)
 
 if __name__ == '__main__':
 
@@ -178,16 +217,19 @@ if __name__ == '__main__':
     problem_1(Q_FILENAME, A_FILENAME, min_sup)
     """
 
-    """
     print "------------Problem 2-------------"
     Q_FILENAME = "q2_Q.txt"
     min_sup = 3
     problem_2(Q_FILENAME, min_sup)
+
+    print "------------Problem 3-------------"
+    Q_FILENAME = "q3_Q.txt"
+    min_sup = 4
+    problem_3(Q_FILENAME, min_sup)
+
     """
-
-
-
-
-
-
+    Q_FILENAME = "q31_Q.txt"
+    min_sup = 4
+    problem_3(Q_FILENAME, min_sup)
+    """
 
