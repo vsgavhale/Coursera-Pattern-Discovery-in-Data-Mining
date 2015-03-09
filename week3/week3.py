@@ -267,46 +267,46 @@ def problem_4(Q_FILENAME, projected):
 if __name__ == '__main__':
 
     print "------------Problem 1-------------"
-    Q_FILENAME = "q1_Q.txt"
-    A_FILENAME = "q1_A.txt"
+    Q_FILENAME = "data/q1_Q.txt"
+    A_FILENAME = "data/q1_A.txt"
     min_sup = 3
     problem_1(Q_FILENAME, A_FILENAME, min_sup)
 
     """
     # Another dataset for testing
     print "-----------------------------"
-    Q_FILENAME = "q11_Q.txt"
-    A_FILENAME = "q11_A.txt"
+    Q_FILENAME = "data/q11_Q.txt"
+    A_FILENAME = "data/q11_A.txt"
     min_sup = 3
     problem_1(Q_FILENAME, A_FILENAME, min_sup)
     """
 
     print "------------Problem 2-------------"
-    Q_FILENAME = "q2_Q.txt"
+    Q_FILENAME = "data/q2_Q.txt"
     min_sup = 3
     problem_2(Q_FILENAME, min_sup)
 
     print "------------Problem 3-------------"
-    Q_FILENAME = "q31_Q.txt"
+    Q_FILENAME = "data/q31_Q.txt"
     min_sup = 4
     problem_3(Q_FILENAME, min_sup)
 
     """
     # Another dataset for testing
-    Q_FILENAME = "q3_Q.txt"
+    Q_FILENAME = "data/q3_Q.txt"
     min_sup = 4
     problem_3(Q_FILENAME, min_sup)
     """
 
     print "------------Problem 4-------------"
-    Q_FILENAME = "q4_Q.txt"
+    Q_FILENAME = "data/q4_Q.txt"
     projected = "e"
     problem_4(Q_FILENAME, projected)
 
     """
     # Another dataset for testing
     print "------------Problem 4-------------"
-    Q_FILENAME = "q41_Q.txt"
+    Q_FILENAME = "data/q41_Q.txt"
     projected = "a"
     problem_4(Q_FILENAME, projected)
     """
