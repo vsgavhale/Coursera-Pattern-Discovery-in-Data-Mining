@@ -275,16 +275,18 @@ if __name__ == '__main__':
     problem_2(Q_FILENAME, min_sup)
 
     print "------------Problem 3-------------"
-    Q_FILENAME = "q3_Q.txt"
-    min_sup = 4
-    problem_3(Q_FILENAME, min_sup)
-
-    """
-    # Another dataset for testing
     Q_FILENAME = "q31_Q.txt"
     min_sup = 4
     problem_3(Q_FILENAME, min_sup)
+
+
     """
+    # Another dataset for testing
+    Q_FILENAME = "q3_Q.txt"
+    min_sup = 4
+    problem_3(Q_FILENAME, min_sup)
+    """
+
 
     print "------------Problem 4-------------"
     Q_FILENAME = "q4_Q.txt"
