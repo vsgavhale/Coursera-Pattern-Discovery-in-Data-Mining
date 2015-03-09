@@ -66,7 +66,7 @@ Look at the Problem 4 part in the script.
 
 The results are like the following:  
 ------------Problem 4-------------  
-<af(e)(cdeh)cfg(abe)>: <(cdeh)cfg(abe)>  
-<ad(bc)c(fg)(ch)>: No <e>-projected database.  
-<bc(ad)ebf(cdfgh)>: <bf(cdfgh)>  
-<ab(bd)d(eg)(adf)gh>: <(_g)(adf)gh>  
+"<af(e)(cdeh)cfg(abe)>: <(cdeh)cfg(abe)>"  
+"<ad(bc)c(fg)(ch)>: No <e>-projected database."  
+"<bc(ad)ebf(cdfgh)>: <bf(cdfgh)>"   
+"<ab(bd)d(eg)(adf)gh>: <(_g)(adf)gh>"  
