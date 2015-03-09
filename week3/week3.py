@@ -216,10 +216,41 @@ def problem_4(Q_FILENAME, projected):
                 print "Parentheses don't match! Check input file."
                 return False
             else:
-                print each_line
-                stack = []
+                # print each_line
+                projected_index = []
+                braces_dict = { "(":[], ")":[] }
                 for i in range(len(each_line)):
-
+                    if each_line[i] == projected:
+                        projected_index.append(i)
+                    elif each_line[i] in braces_dict:
+                        braces = each_line[i]
+                        braces_dict[braces].append(i)
+                if len(projected_index) == 0:
+                    print each_line + ": " + "No <" + projected + ">-projected database."
+                    continue
+                first_position = projected_index[0]
+                # print first_position
+                zipped = zip(braces_dict.values()[0], braces_dict.values()[1])
+                # print zipped
+                # print braces_dict
+                inside = False
+                underscore = False
+                for z in zipped:
+                    if min(z) < first_position < max(z):
+                        inside = True
+                        if first_position + 1 != max(z):
+                            underscore = True
+                # print inside
+                # print underscore
+                result = each_line[first_position:]
+                if inside and underscore:
+                    result = result.replace(projected, "_", 1)
+                    result = "(" + result
+                elif inside:
+                    result = result[2:]
+                else:
+                    result = result[1:]
+                print each_line + ": <" + result
 
 if __name__ == '__main__':
 
@@ -249,6 +280,7 @@ if __name__ == '__main__':
     problem_3(Q_FILENAME, min_sup)
 
     """
+    # Another dataset for testing
     Q_FILENAME = "q31_Q.txt"
     min_sup = 4
     problem_3(Q_FILENAME, min_sup)
@@ -259,3 +291,10 @@ if __name__ == '__main__':
     projected = "e"
     problem_4(Q_FILENAME, projected)
 
+    """
+    # Another dataset for testing
+    print "------------Problem 4-------------"
+    Q_FILENAME = "q41_Q.txt"
+    projected = "a"
+    problem_4(Q_FILENAME, projected)
+    """
