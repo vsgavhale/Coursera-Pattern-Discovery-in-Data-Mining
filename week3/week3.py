@@ -200,6 +200,27 @@ def problem_3(Q_FILENAME, min_sup, length=2):
             else:
                 print f + " => " + str(result)
 
+'''
+Main function for Problem 4
+'''
+def problem_4(Q_FILENAME, projected):
+    with open(Q_FILENAME, 'r') as f:
+        seqs = []
+        lines = f.readlines()
+        for each_line in lines:
+            each_line = each_line.strip()
+            each_line = each_line.lower()
+            each_line = re.sub("[^a-z|\(|\)|\<|\>]+", \
+                        "", each_line)
+            if not is_valid(each_line):
+                print "Parentheses don't match! Check input file."
+                return False
+            else:
+                print each_line
+                stack = []
+                for i in range(len(each_line)):
+
+
 if __name__ == '__main__':
 
     print "------------Problem 1-------------"
@@ -232,4 +253,9 @@ if __name__ == '__main__':
     min_sup = 4
     problem_3(Q_FILENAME, min_sup)
     """
+
+    print "------------Problem 4-------------"
+    Q_FILENAME = "q4_Q.txt"
+    projected = "e"
+    problem_4(Q_FILENAME, projected)
 
