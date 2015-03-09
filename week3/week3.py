@@ -1,12 +1,11 @@
 #!/usr/bin/env python
 
-__author__      = "Sallyxdz"
+__author__ = "Sallyxdz"
 
 import re
 import itertools
 from collections import Counter
 from math import factorial
-
 
 def readfile(FILENAME):
     with open(FILENAME, 'r') as f:
@@ -88,33 +87,22 @@ Core function for checking subsequences
 def is_sub_sequence(q, a):
 
     i, j, match = [0]*3
+
     while i < len(a) and j < len(q):
         len_a = len(a[i])
         len_q = len(q[j])
-        if len_a > len_q:
-            j += 1
-            continue
-        elif len_a == len_q:
-            if a[i] == q[j]:
-                match += 1
-                i += 1
-                j += 1
-                continue
-            else:
-                j += 1
-                continue
-        else: # len_a < len_q
+        if len_a < len_q:
             combs = []
             for c in itertools.combinations(q[j],len_a):
                 combs.append("".join(c))
             if a[i] in combs:
                 match += 1
                 i += 1
-                j += 1
-                continue
-            else:
-                j += 1
-                continue
+        elif a[i] == q[j]:
+            match += 1
+            i += 1
+        j += 1
+        continue
 
     if match == len(a):
         return True
@@ -190,11 +178,12 @@ if __name__ == '__main__':
     problem_1(Q_FILENAME, A_FILENAME, min_sup)
     """
 
+    """
     print "------------Problem 2-------------"
     Q_FILENAME = "q2_Q.txt"
     min_sup = 3
     problem_2(Q_FILENAME, min_sup)
-
+    """
 
 
 
