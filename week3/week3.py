@@ -7,6 +7,10 @@ import itertools
 from collections import Counter
 from math import factorial
 
+'''
+This function reads the text files and output sequences without
+non-alphabetical characters.
+'''
 def readfile(FILENAME):
     with open(FILENAME, 'r') as f:
         seqs = []
@@ -46,7 +50,9 @@ def readfile(FILENAME):
                     seqs.append(line_result)
         return seqs
 
-
+'''
+This function checks whether the parentheses are balanced.
+'''
 def is_valid(str):
     stack = []
     matching = { "<":">", "(":")" } #  "[":"]", "{":"}" }
@@ -60,7 +66,10 @@ def is_valid(str):
             pass
     return len(stack) == 0
 
-
+'''
+This function checks whether the sequence is a subsequence of
+a set of sequences based on the min support value.
+'''
 def frequent_sequences(q_elems, a, min_sup):
     if min_sup > len(q_elems):
         return False
@@ -85,7 +94,7 @@ def frequent_sequences(q_elems, a, min_sup):
     return False
 
 '''
-Core function for checking subsequences
+This is the core function for checking subsequences.
 '''
 def is_sub_sequence(q, a):
 
@@ -212,6 +221,7 @@ def problem_4(Q_FILENAME, projected):
             each_line = each_line.lower()
             each_line = re.sub("[^a-z|\(|\)|\<|\>]+", \
                         "", each_line)
+
             if not is_valid(each_line):
                 print "Parentheses don't match! Check input file."
                 return False
@@ -228,6 +238,7 @@ def problem_4(Q_FILENAME, projected):
                 if len(projected_index) == 0:
                     print each_line + ": " + "No <" + projected + ">-projected database."
                     continue
+
                 first_position = projected_index[0]
                 # print first_position
                 zipped = zip(braces_dict.values()[0], braces_dict.values()[1])
@@ -242,6 +253,7 @@ def problem_4(Q_FILENAME, projected):
                             underscore = True
                 # print inside
                 # print underscore
+
                 result = each_line[first_position:]
                 if inside and underscore:
                     result = result.replace(projected, "_", 1)
@@ -279,14 +291,12 @@ if __name__ == '__main__':
     min_sup = 4
     problem_3(Q_FILENAME, min_sup)
 
-
     """
     # Another dataset for testing
     Q_FILENAME = "q3_Q.txt"
     min_sup = 4
     problem_3(Q_FILENAME, min_sup)
     """
-
 
     print "------------Problem 4-------------"
     Q_FILENAME = "q4_Q.txt"
